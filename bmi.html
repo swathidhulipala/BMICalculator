@@ -1,0 +1,90 @@
+<html>
+<title>
+	Personal BMI Calculator
+</title>
+<script type="text/javascript">
+
+
+function calculateBMI(element){
+	let eId = element.id;
+	let decimals = 2;
+	let hcm, hinch, wkg, wlb;
+	if(eId == 'heightcm'){
+		hcm = document.getElementById("heightcm").value;
+		hinch = hcm / 2.54;
+		hinch = Number(Math.round(hinch+'e'+decimals)+'e-'+decimals);
+		document.getElementById('heightinch').value = hinch;
+	}
+	else if(eId == 'heightinch'){
+		hinch = document.getElementById("heightinch").value;
+		hcm = hinch * 2.54;
+		hcm =  Number(Math.round(hcm+'e'+decimals)+'e-'+decimals);
+		document.getElementById('heightcm').value = hcm;
+	}
+	else if(eId == 'weightkg'){
+		wkg = document.getElementById('weightkg').value;
+		wlb = wkg * 2.205;
+		wlb =  Number(Math.round(wlb+'e'+decimals)+'e-'+decimals);
+		document.getElementById('weightlb').value = wlb;
+	}
+	else if(eId == 'weightlb'){
+		wlb = document.getElementById("weightlb").value;
+		wkg = wlb / 2.205;
+		wkg =  Number(Math.round(wkg+'e'+decimals)+'e-'+decimals);
+		document.getElementById('weightkg').value = wkg;
+	}
+
+	hcm = document.getElementById("heightcm").value;
+	wkg = document.getElementById("weightkg").value;
+	
+	let height = hcm/100;
+	let weight = wkg/1;
+	let bmi = 0;
+	if(typeof height == 'number' && typeof weight == 'number'){
+		if(height > 0 && weight > 0 ){
+			bmi = weight/height/height;
+			bmi = Number(Math.round(bmi+'e'+decimals)+'e-'+decimals);
+			
+		}
+		else{
+			bmi = 0;
+		}
+		let msg = "BMI is "+bmi;
+		document.getElementById("bmi").innerHTML = msg;
+		
+	}
+	else{
+		alert("Enter numeric values as input");
+	}
+}
+
+</script>
+
+<h4> BMI Calculator </h4>
+
+<label> Height(in cms): </label>
+<input type="text" name="heightcm" id="heightcm" onchange="calculateBMI(this)">
+<br>
+<br>
+
+
+<label> Height(in inches): </label>
+<input type="text" name="heightinch" id="heightinch" onchange="calculateBMI(this)">
+<br>
+<br>
+
+
+
+<label> Weight(in kgs): </label>
+<input type="text" name="weightkg" id="weightkg" onchange="calculateBMI(this)">
+<br>
+<br>
+
+
+<label> Weight(in lbs): </label>
+<input type="text" name="weightlb" id="weightlb" onchange="calculateBMI(this)">
+<br>
+<br>
+
+<p id = "bmi"></p>
+</html>
